@@ -9,7 +9,9 @@ phases:
       - echo $AWS_DEFAULT_REGION
       - REPOSITORY_URI=108040610828.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo $COMMIT_HASH
       - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo $IMAGE_TAG
   build:
     commands:
       - echo Build started on `date`
