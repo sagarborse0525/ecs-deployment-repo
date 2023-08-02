@@ -1,9 +1,4 @@
-FROM ubuntu
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get install apache2 -y
-RUN apt-get install apache2-utils -y
-RUN apt-get clean
-EXPOSE 80
-RUN echo "Hello From Server 2" > /var/www/html/index.html
-CMD ["apache2ctl","-D","FOREGROUND"]
+FROM httpd:latest
+RUN echo "Welcome Docker1" > /var/www/html/index.html
+RUN echo "Welcome Docker2" > /usr/local/apache2/htdocs/index.html
+CMD ["httpd-foreground"]
