@@ -11,6 +11,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo "Sagar@0525" | docker login -u sagar0525 --password-stdin
       - docker build -t demo-repo .
       - docker tag demo-repo:latest 108040610828.dkr.ecr.us-east-1.amazonaws.com/demo-repo:latest
   post_build:
