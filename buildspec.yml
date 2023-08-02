@@ -5,7 +5,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      
+      - echo "Sagar@0525" | docker login -u sagar0525 --password-stdin
       - echo $AWS_DEFAULT_REGION
       - REPOSITORY_URI=108040610828.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
@@ -16,14 +16,13 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - echo "Sagar@0525" | docker login -u sagar0525 --password-stdin
+      
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 108040610828.dkr.ecr.us-east-1.amazonaws.com
       - docker images
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
