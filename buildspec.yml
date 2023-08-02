@@ -16,6 +16,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo "Sagar@0525" | docker login -u sagar0525 --password-stdin
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
